@@ -1,11 +1,9 @@
-import React from 'react'
+import DashboardLayout from './Components/DashboardLayout';  
 
-const App = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const App = () => {  
+    return (  
+        <DashboardLayout />  
+    );  
+};  
 
-export default App
+export default App;
