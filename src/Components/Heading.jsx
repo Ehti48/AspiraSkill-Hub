@@ -8,7 +8,7 @@ const Wrapper = styled.section`
 
     h1 {  
         color: #252E4A;
-        font-size: 18px;  
+        font-size: 20px;  
         font-weight: 500;  
     }  
 }

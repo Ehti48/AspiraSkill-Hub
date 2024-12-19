@@ -151,10 +151,10 @@ const Wrapper = styled.section`
         }
     }
 
-     .upload-img {
-    position: relative;
-    width: 240px;
-    border-radius: 5px;
+    .upload-img {
+        position: relative;
+        width: 240px;
+        border-radius: 5px;
 
     .updated-addImage, .updated-addImageMaterial {
       max-width: 100%;
@@ -352,14 +352,6 @@ const Detail = () => {
         }
     };
 
-    // On component mount, load the image
-    // useEffect(() => {
-    //     const savedImage = localStorage.getItem("thumbnail");
-    //     if (savedImage) setImg(savedImage);
-    // }, []);
-
-
-
     const editStage = (id) => {
         const stageToEdit = stages.find((stage) => stage.id === id);
         setName(stageToEdit.title || '');
@@ -546,10 +538,10 @@ const Detail = () => {
                     <div className="confirmation-modal">
                         <div className="confirmation-content">
                             <div class="del-icon">
-                                <img src="https://admin.aspiraskillhub.aspirasys.com/images/mdi_trash.png" alt="delete"/>
+                                <img src="https://admin.aspiraskillhub.aspirasys.com/images/mdi_trash.png" alt="delete" />
                             </div>
                             <h3>Are you sure?</h3>
-                            <p>you want to delete {deleteId ? name : null }</p>
+                            <p>you want to delete {deleteId ? name : null}</p>
                             <button className="cancel" onClick={cancelDelete}>
                                 No
                             </button>

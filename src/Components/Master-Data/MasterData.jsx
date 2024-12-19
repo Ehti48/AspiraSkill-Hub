@@ -299,7 +299,7 @@ const aspirants = [
   // Add more data here as needed
 ];
 
-function Masterdata() {
+function MasterData() {
   const [filters, setFilters] = useState({
     name: "",
     gender: "",
@@ -499,8 +499,8 @@ function Masterdata() {
                   </td>
                   <td>
                     <button className="action-btn">
-                      <Link to="/profile">
-                        <img src="\src\assets\action.svg" alt="" />
+                      <Link to="/admin/master-data/view">
+                      <img src="https://admin.aspiraskillhub.aspirasys.com/images/export-pro.png"/>
                       </Link>
                     </button>
                   </td>
@@ -515,4 +515,4 @@ function Masterdata() {
   );
 }
 
-export default Masterdata;
+export default MasterData;

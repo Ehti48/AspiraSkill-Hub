@@ -37,13 +37,12 @@ const Wrapper = styled.section`
             font-size: 18px;
             text-decoration: none;
         }
+    }
 
-        &.arrow {
+        svg {
             color: #252E4A99;
             font-size: 30px;
-            height: 35px;
         }
-    }
   }
 
   .card-sec { 
@@ -65,29 +64,37 @@ const Wrapper = styled.section`
             flex-direction: column;
 
             .card-img {
-                width: 200px;
-                height: 120px;
+                width: 220px;
+                height: 140px;
                 background: #f0f0f0;
+                object-fit: contain;
             }
 
             h3 {
                 padding: 10px 0 5px 0; 
                 font-size: 16px;
                 font-weight: 500;
+                color: #252E4A;
                 line-height: 1.2;
-                letter-spacing: 1px;
             }
 
             p {
-                margin-bottom: 5px;
+                margin-bottom: 8px;
                 font-size: 14px;
                 font-weight: 500;
-                color: #6D7785;
+                color: #252E4A99;
+                position: relative;
+
+                span {
+                    position: absolute;
+                    right: 0;
+                    color: #6AAA43;
+                }
             }
 
             .range {
-                display: block;
-                padding-bottom: 5px;
+                display: inline-flex;
+                margin-bottom: 15px;
             }
 
            .range-input {
@@ -123,10 +130,23 @@ const Wrapper = styled.section`
 
         }
 
+        a {
+            text-decoration: none;
+        }
+
             button {
                 width: 100%;
-                font-size: 16px;
+                padding: 12px;
+                font-size: 14px;
                 font-weight: 500;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                span {
+                    display: inline-flex;
+                    padding-left: 8px;
+                }
             }
         }
     }
@@ -141,9 +161,9 @@ const TechStage = () => {
     const techName = location.state?.techName;
 
     const stages = [
-        { id: 1, title: "Beginner", progress: 100, image: "beginner-image-url" },
-        { id: 2, title: "Intermediate", progress: 50, image: "intermediate-image-url" },
-        { id: 3, title: "Advanced", progress: 0, image: "advanced-image-url" },
+        { id: 1, title: "Beginner", start: 'Completed', progress: 100, image: "https://admin.aspiraskillhub.aspirasys.com/uploads/technology/1727864297.png" },
+        { id: 2, title: "Intermediate", start: 'In Progress', progress: 50, image: "https://admin.aspiraskillhub.aspirasys.com/images/no-image-found.jpg" },
+        { id: 3, title: "Advanced", start: 'Yet To Start', progress: 0, image: "https://admin.aspiraskillhub.aspirasys.com/uploads/technology/1727886880.png" },
     ];
 
     const getRangeStyle = (value) => ({
@@ -158,11 +178,11 @@ const TechStage = () => {
                         <li className="breadcrumb-item">
                             <Link to="/admin/aspirants-progress">Training Plan</Link>
                         </li>
-                        <li className="arrow"><MdKeyboardArrowRight/></li>
+                        <MdKeyboardArrowRight/>
                         <li className="breadcrumb-item">
                             <Link onClick={() => navigate(-1)}>{techName}</Link>
                         </li>
-                        <li className="arrow"><MdKeyboardArrowRight/></li>
+                        <MdKeyboardArrowRight/>
                         <li className="breadcrumb-item active" aria-current="page">
                             {techId}
                         </li>
@@ -174,7 +194,7 @@ const TechStage = () => {
                             <div className="card-body">
                                 <img src={stage.image} alt={`${stage.title} Image`} className="card-img" />
                                 <h3 className="card-title">{stage.title}</h3>
-                                <p className="card-text">Course Progress</p>
+                                <p className="card-text">{stage.start} <span>{stage.progress}%</span></p>
                                 <div className="range">
                                     <input
                                         type="range"
@@ -190,7 +210,7 @@ const TechStage = () => {
                                 to="/admin/aspirants-progress/material-detail"
                                 state={{stageTitle: stage.title, techName: techName, studentId: studentId}}
                                 >
-                                    <Button>View stage</Button>
+                                    <Button>View stage <span><img src="https://admin.aspiraskillhub.aspirasys.com/images/arrow-right.png"/></span></Button>
                                 </Link>
                             </div>
                         </div>

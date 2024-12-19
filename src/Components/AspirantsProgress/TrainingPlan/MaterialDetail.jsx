@@ -50,12 +50,11 @@ const Wrapper = styled.section`
             padding-right: 5px;
         }
 
-        &.arrow {
+      }
+        svg {
             color: #252E4A99;
             font-size: 30px;
-            height: 35px;
         }
-    }
   }
     .usertime-name {
         position: relative;
@@ -81,7 +80,6 @@ const Wrapper = styled.section`
 
      .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {
@@ -114,30 +112,19 @@ const Wrapper = styled.section`
     height: 45px;
     padding-left: 10px;
     display: grid;
+    grid-template-columns: 0.4fr 0.7fr 2fr 1fr 1fr!important;
     border: 1px solid #cbcbcb;
     border-top: none;
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
-    font-size: 14px;
-
+   
     td {
-      color: #505050;
       padding: 10px;
+      color: #252E4A;
+      font-size: 14px;
+      font-weight: 400;
     }
-
-    .num {
-        padding: 10px 0 10px 25px;
-    }
-  }
-
-  .odd1 {
-    position: relative;
-    top: 4px;
-    color: #000000b0;
-    background: #ebf3fa;
-    font-size: 13px;
-    border: 1px solid #cbcbcb;
   }
 
   .stack-output {
@@ -164,7 +151,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 50vh;
   }
 
   .searchBox {
@@ -196,25 +182,6 @@ const Wrapper = styled.section`
     margin: 10px auto;
     overflow-x: scroll;
   }
-
-  .odd {
-    min-width: 770px;
-    height: 45px;
-    display: grid;
-    grid-template-columns: 0.3fr 1fr 2fr 1fr 1fr!important;
-    border: 1px solid #cbcbcb;
-    border-top: none;
-    justify-content: space-evenly;
-    align-content: center;
-    align-items: center;
-    font-size: 14px;
-
-    td {
-      color: #252E4ABA;
-      padding: 10px;
-    }
-  }
-
   .odd1 {
     position: relative;
     top: 4px;
@@ -307,19 +274,19 @@ const MaterialDetail = () => {
                 Training Plan
               </Link>
             </li>
-            <li className='arrow'><MdKeyboardArrowRight /></li>
+            <MdKeyboardArrowRight />
             <li className="breadcrumb-item">
               <Link onClick={() => navigate(-2)}>
                 {techName}
               </Link>
             </li>
-            <li className='arrow'><MdKeyboardArrowRight /></li>
+            <MdKeyboardArrowRight />
             <li className="breadcrumb-item">
               <Link onClick={() => navigate(-1)}>
                 {stageTitle}
               </Link>
             </li>
-            <li className='arrow'><MdKeyboardArrowRight /></li>
+            <MdKeyboardArrowRight />
             <li className="breadcrumb-item active" aria-current="page">
               {studentId}
             </li>

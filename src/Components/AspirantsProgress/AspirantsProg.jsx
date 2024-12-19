@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
 import Timesheet from './Timesheet/Timesheet';
@@ -8,8 +9,10 @@ import Interviews from './Interview/Interviews';
 
 const Wrapper = styled.section`
   .sub-navbar {
-    padding: 0 20px;
+    padding: 0 12px;
     background: #fff;
+    box-shadow: 0px 2px 12px 1px rgba(6, 40, 61, 0.06);
+    margin-bottom: 20px;
     ul {
       height: 100%;
       display: flex;
@@ -18,25 +21,33 @@ const Wrapper = styled.section`
 
       li {
         height: 100%;
-        padding: 15px 25px;
         font-size: 16px;
         font-weight: 500;
         list-style: none;
         cursor: pointer;
         border-bottom: 2px solid transparent;
-
-        &:hover {
-          color: #0078d7;
-          border-bottom: 2px solid #0078d7;
-        }
-        &.active {
-          color: #0078d7;
-          border-bottom: 2px solid #0078d7;
-        }
+        transition: all 0.3s ease;
 
         a {
-          color: #000;
+          display: block;
+          padding: 15px 25px;          
+          color: #252e4a;
           text-decoration: none;
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          transition: all 0.3s ease;
+          border-bottom: 2px solid #0078d7;
+          & a {
+            color: #0078d7;
+          }
+        }
+        &.active {
+          border-bottom: 2px solid #0078d7;
+          & a {
+            color: #0078d7;
+          }
         }
       }
     }
@@ -54,16 +65,20 @@ const Wrapper = styled.section`
   }
 `;
 
-const AspirantsProg = () => {
-  const [activeSection, setActiveSection] = useState('timesheet');
-  const containerRef = useRef(null); // Ref for the container
 
-  const handleNavClick = (section) => {
+const AspirantsProg = () => {
+  const location = useLocation();
+  const [activeSection, setActiveSection] = useState('timesheet');
+  const containerRef = useRef(null);
+
+  // Update active section based on query parameter
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const section = params.get('page') || 'timesheet';
     setActiveSection(section);
-  };
+  }, [location]);
 
   useEffect(() => {
-    // Animate the container when the active section changes
     if (containerRef.current) {
       gsap.fromTo(
         containerRef.current,
@@ -77,29 +92,17 @@ const AspirantsProg = () => {
     <Wrapper>
       <nav className="sub-navbar">
         <ul>
-          <li
-            className={activeSection === 'timesheet' ? 'active' : ''}
-            onClick={() => handleNavClick('timesheet')}
-          >
-            Timesheet
+          <li className={activeSection === 'timesheet' ? 'active' : ''}>
+            <Link to="/admin/aspirants-progress?page=timesheet">Timesheet</Link>
           </li>
-          <li
-            className={activeSection === 'trainingPlan' ? 'active' : ''}
-            onClick={() => handleNavClick('trainingPlan')}
-          >
-            Training Plan
+          <li className={activeSection === 'trainingPlan' ? 'active' : ''}>
+            <Link to="/admin/aspirants-progress?page=trainingPlan">Training Plan</Link>
           </li>
-          <li
-            className={activeSection === 'certificates' ? 'active' : ''}
-            onClick={() => handleNavClick('certificates')}
-          >
-            Certificates
+          <li className={activeSection === 'certificates' ? 'active' : ''}>
+            <Link to="/admin/aspirants-progress?page=certificates">Certificates</Link>
           </li>
-          <li
-            className={activeSection === 'interviews' ? 'active' : ''}
-            onClick={() => handleNavClick('interviews')}
-          >
-            Interviews
+          <li className={activeSection === 'interviews' ? 'active' : ''}>
+            <Link to="/admin/aspirants-progress?page=interviews">Interviews</Link>
           </li>
         </ul>
       </nav>

@@ -16,7 +16,9 @@ import AspirantCertificates from './AspirantsProgress/AspiraCertificate/Aspirant
 import InterviewDetail from './AspirantsProgress/Interview/InterviewDetail';
 import NewRegisteration from './NewRegs/NewRegisteration';
 import Events from './Events&Info/Events';
-import Masterdata from './Master-Data/MasterData';
+import AspirantsView from './NewRegs/AspirantsView';
+import MasterData from './Master-Data/MasterData';
+import MasterDataView from './Master-Data/MasterDataView';
 
 const Wrapper = styled.section`
     .dashboard {
@@ -148,6 +150,14 @@ const Main = () => {
                         }
                     />
                     <Route
+                        path="/admin/new-registration/aspirants-view"
+                        element={
+                            <PageTransition>
+                                <AspirantsView />
+                            </PageTransition>
+                        }
+                    />
+                    <Route
                         path="/admin/events-info"
                         element={
                             <PageTransition>
@@ -159,7 +169,15 @@ const Main = () => {
                         path="/admin/master-data"
                         element={
                             <PageTransition>
-                                <Masterdata />
+                                <MasterData />
+                            </PageTransition>
+                        }
+                    />
+                    <Route
+                        path="/admin/master-data/view"
+                        element={
+                            <PageTransition>
+                                <MasterDataView />
                             </PageTransition>
                         }
                     />

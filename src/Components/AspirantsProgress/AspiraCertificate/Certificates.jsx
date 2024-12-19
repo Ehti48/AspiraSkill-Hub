@@ -11,10 +11,9 @@ const Wrapper = styled.section`
         height: 25px;
     }
 
-     .container-2 {
-    width: 100%;
-    min-height: 100vh;
-  }
+    .container-2 {
+      width: 100%;
+    }
 
   .header {
     width: 100% !important;
@@ -61,11 +60,12 @@ const Wrapper = styled.section`
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
-    font-size: 14px;
 
     td {
-      color: #505050;
       padding: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #252e4a;
     }
   }
 
@@ -76,6 +76,11 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+
+     td {
+      font-weight: 500;
+      color: #252e4a99;
+    }
   }
 
   .stack-output {
@@ -113,7 +118,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {
@@ -208,7 +212,7 @@ const Certificates = () => {
 
     const [students, setStudents] = useState([
         { id: 'ASPT0244', techName: 'Basic Web Tech', name: 'Ibrahim.K', certificate: '-', },
-        { id: 'ASPT0244', techName: 'Basic Web Tech', name: 'Ibrahim.K', certificate: '-', },
+        { id: 'ASPT0245', techName: 'React JS', name: 'Iqyan', certificate: '-', },
     ]);
 
     const [searchQuery, setSearchQuery] = useState('');
@@ -274,7 +278,10 @@ const Certificates = () => {
                                         <td>{student.name}</td>
                                         <td>{student.certificate}</td>
                                         <td className="stack-output">
-                                            <NavLink to='/admin/aspirants-progress/aspirant-certificate'>
+                                            <NavLink 
+                                            to='/admin/aspirants-progress/aspirant-certificate'
+                                            state={{studentId: student.id, studentName: student.name}}
+                                            >
                                                 <button>
                                                   <img src="https://admin.aspiraskillhub.aspirasys.com/images/eye.png"/>
                                                 </button>

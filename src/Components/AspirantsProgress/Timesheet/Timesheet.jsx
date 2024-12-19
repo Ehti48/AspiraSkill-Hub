@@ -6,7 +6,8 @@ import Button from '../../Button';
 
 const Wrapper = styled.section`
   .dateSec {
-    padding: 20px;
+    margin-bottom: 14px;
+    padding: 16px 20px;
     background: rgba(222, 222, 222, 0.1);
     border: 1px solid #dedede;
     border-radius: 4px;
@@ -16,8 +17,8 @@ const Wrapper = styled.section`
     width: 95%;
     display: flex;
     flex-wrap: wrap;
-    gap: 1vw;
-    row-gap: 2vw;
+    gap: 10px;
+    row-gap: 20px;
     align-items: flex-end;
   }
 
@@ -31,7 +32,6 @@ const Wrapper = styled.section`
   .date-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
     position: relative;
 
     label {
@@ -118,22 +118,25 @@ const Wrapper = styled.section`
   /////////////////////// Timesheet Listing //////////////////
 
   .heading {
-    margin-top: 20px;
     height: 25px;
   }
 
   .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {
-    width: 95%;
+    width: 100%;
     margin: auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 1vw;
+    gap: 5px;
+
+    button {
+      padding: 8px 12px;
+      font-weight: 500;
+    }
   }
 
   .searchBox {
@@ -142,11 +145,10 @@ const Wrapper = styled.section`
 
     input {
       width: 150px;
-      height: 45px;
-      padding: 0 10px;
-      font-size: 18px;
+      padding: 5px 10px;
+      font-size: 16px;
       border: 2px solid #00000080;
-      border-radius: 5px;
+      border-radius: 3px;
     }
   }
 
@@ -170,7 +172,7 @@ const Wrapper = styled.section`
     height: 40px;
     display: grid;
     padding-left: 15px;
-    grid-template-columns: 0.3fr 0.7fr 1.5fr 1.5fr 1fr 1fr 1fr !important;
+    grid-template-columns: 0.3fr 0.7fr 1.5fr 1.5fr 1fr 1fr 0.8fr !important;
     border: 1px solid #cbcbcb;
     border-top: none;
     justify-content: space-evenly;
@@ -179,8 +181,10 @@ const Wrapper = styled.section`
     font-size: 14px;
 
     td {
-      color: #505050;
+      color: #252e4a;
       padding: 10px;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 
@@ -191,6 +195,11 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+      td {
+        color: #252e4a99;
+        font-weight: 500;
+      }
+
   }
 
   .odd2 {

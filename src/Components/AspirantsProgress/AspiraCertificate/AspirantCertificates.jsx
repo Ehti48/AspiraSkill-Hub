@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Heading from '../../Heading';
-import { NavLink, Link } from 'react-router-dom';
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import Button from '../../Button';
 
 const Wrapper = styled.section`
@@ -25,9 +26,10 @@ const Wrapper = styled.section`
     margin: 25px 0;
     display: flex;
     list-style: none;
+    align-items: center;
 
     li {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 500;
         color: #252e4a;
         a{
@@ -36,7 +38,12 @@ const Wrapper = styled.section`
             text-decoration: none;
             padding-right: 5px;
         }
-    }
+
+        }
+        svg {
+            font-size: 30px;
+            color: #252E4A99;
+        }
   }
 
     .usertime-name {
@@ -60,10 +67,9 @@ const Wrapper = styled.section`
         height: 25px;
     }
 
-     .container-2 {
-    width: 100%;
-    min-height: 100vh;
-  }
+    .container-2 {
+      width: 100%;
+    }
 
   .header {
     width: 100% !important;
@@ -102,28 +108,6 @@ const Wrapper = styled.section`
     width: 100% !important;
     margin: 10px auto;
     overflow-x: scroll;
-  }
-
-  .odd {
-    min-width: 770px;
-    height: 45px;
-    padding-left: 10px;
-    display: grid;
-    border: 1px solid #cbcbcb;
-    border-top: none;
-    justify-content: space-evenly;
-    align-content: center;
-    align-items: center;
-    font-size: 14px;
-
-    td {
-      color: #505050;
-      padding: 10px;
-    }
-
-    .num {
-        padding: 10px 0 10px 25px;
-    }
   }
 
   .odd1 {
@@ -170,7 +154,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 50vh;
   }
 
   .searchBox {
@@ -206,6 +189,7 @@ const Wrapper = styled.section`
   .odd {
     min-width: 770px;
     height: 45px;
+    padding-left: 10px;
     display: grid;
     grid-template-columns: 0.3fr 1fr 1fr 1fr 0.7fr 0.5fr!important;
     border: 1px solid #cbcbcb;
@@ -216,9 +200,9 @@ const Wrapper = styled.section`
     font-size: 14px;
 
     td {
-      color: #252E4A99;
+      color: #252E4A;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400;
       padding: 10px;
     }
 
@@ -239,6 +223,11 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+
+    td {
+      color: #252E4A99;
+      font-weight: 500;
+    }
   }
 
   .stack-output {
@@ -293,24 +282,50 @@ const Wrapper = styled.section`
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  width: 400px;
+  width: 90%;
+  max-width: 700px;
+  position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  .heading {
+  border-bottom: 1px solid #252e4a33;
+  padding-bottom: 10px;
+  min-height: 40px;
 }
 
-/* Modal Header */
-.modal-content h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: bold;
+.cancelBtn {
+    position: absolute;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #252e4a99;
+}
+}
+
+.form-group {
+  display: flex;
+
+  .input-cont {
+    width: 50%;
+    padding: 10px;
+
+    label {
+      display: block;
+      color: #252E4A99;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  }
 }
 
 /* Modal Input Fields */
-.modal-content input {
+.modal-content input, select {
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   border: 1px solid #ddd;
   border-radius: 4px;
   width: 100%;
@@ -318,13 +333,14 @@ const Wrapper = styled.section`
 
 .modal-content input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #3282c4;
 }
 
 /* Modal Actions (Buttons) */
 .modal-actions {
+  margin: 15px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -341,22 +357,77 @@ const Wrapper = styled.section`
 }
 
 .modal-actions button:first-child {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #f0f0f000;
+  border: 2px solid #3282c4;
+  color: #3282c4;
   }
   
   .modal-actions button:last-child {
-  background-color: #007bff;
+  background-color: #3282c4;
   color: white;
+  }
+
+  .upload-img {
+        position: relative;
+        width: 240px;
+        border-radius: 5px;
+
+    .updated-addImage, .updated-addImageMaterial {
+      max-width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .addImage {
+      height: 100%;
+      position: absolute;
+      opacity: 0;
+      top: 0;
+    }
+
+    .upload-content {
+      display: flex;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 30px;
+      border-radius: 5px;
+      border: 2px dotted #3986c6;
+
+      p {
+        color: #3986c6;
+      }
+    }
+
+    .edit-photo {
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+
+    .editImage {
+      position: absolute;
+      top: 25px;
+      height: 83%;
+      opacity: 0;
+    }
   }
 
   `;
 
 
 const AspirantCertificates = () => {
-  const [students, setStudents] = useState([
-    // { cName: "-", cId: "-", cLink: "-", issues: "-" },
-  ]);
+  const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
@@ -367,15 +438,33 @@ const AspirantCertificates = () => {
     cId: "",
     cLink: "",
     issues: "",
+    image: null,
   });
+
+
+  // Load students from localStorage on component mount
+  useEffect(() => {
+    const storedStudents = localStorage.getItem("students");
+    if (storedStudents) {
+      setStudents(JSON.parse(storedStudents));
+    }
+  }, []);
+
+  // Save students to localStorage whenever they are updated
+  useEffect(() => {
+    localStorage.setItem("students", JSON.stringify(students));
+  }, [students]);
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
-  const filteredStudents = students.filter(
-    (student) =>
-      student.cName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.issues.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredStudents = students.filter((student) => {
+    const name = student.cName || ""; // Default to an empty string if undefined
+    const issue = student.issues || ""; // Default to an empty string if undefined
+    return (
+      name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      issue.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
 
   const openModal = (student = null) => {
     if (student) {
@@ -392,6 +481,7 @@ const AspirantCertificates = () => {
       setFormData({ cName: "", cId: "", cLink: "", issues: "" });
     }
     setIsModalOpen(true);
+    document.openModal.style.transition = "all 0.3s ease-in-out";
   };
 
   const closeModal = () => setIsModalOpen(false);
@@ -416,7 +506,7 @@ const AspirantCertificates = () => {
       setStudents([...students, formData]);
     }
     closeModal();
-  };
+  };  
 
   const handleDelete = (studentId) => {
     setIsDeleteConfirmationOpen(true);
@@ -428,21 +518,40 @@ const AspirantCertificates = () => {
     closeDeleteConfirmation();
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setFormData((prevState) => ({
+          ...prevState,
+          image: reader.result, // Store base64-encoded image
+        }));
+      };
+      reader.readAsDataURL(file); // Convert file to base64
+    }
+  };
+
+
+  const location = useLocation();
+  const studentId = location.state?.studentId;
+  const studentName = location.state?.studentName;
   return (
     <Wrapper>
       <div className="user-timesheet">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb ad-sck">
             <li className="breadcrumb-item">
-              <Link to="/admin/aspirants-progress">Certificates</Link>
+              <Link to={{ pathname: "/admin/aspirants-progress", search: "?page=certificates" }}>Certificates</Link>
             </li>
+            <MdKeyboardArrowRight />
             <li className="breadcrumb-item active" aria-current="page">
-              / ASP0450
+              {studentId}
             </li>
           </ol>
         </nav>
         <div className="usertime-id">
-          <p className="usertime-name">Aspirant : ASP0244 - Ibrahim.K</p>
+          <p className="usertime-name">Aspirant : {studentId} - {studentName}</p>
         </div>
       </div>
       <div className="dateSec">
@@ -509,35 +618,68 @@ const AspirantCertificates = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h3>{editMode ? "Edit Certificate" : "Add Certificate"}</h3>
-            <input
-              type="text"
-              name="cName"
-              value={formData.cName}
-              onChange={handleChange}
-              placeholder="Certificate Name"
-            />
-            <input
-              type="text"
-              name="cId"
-              value={formData.cId}
-              onChange={handleChange}
-              placeholder="Credential ID"
-            />
-            <input
-              type="text"
-              name="cLink"
-              value={formData.cLink}
-              onChange={handleChange}
-              placeholder="Certificate Link"
-            />
-            <input
-              type="text"
-              name="issues"
-              value={formData.issues}
-              onChange={handleChange}
-              placeholder="Issues on"
-            />
+            <Heading title={editMode ? "Edit Certificate" : "Certificate"} />
+            <button className='cancelBtn' onClick={() => setIsModalOpen(false)}>✖</button>
+            <div className="form-group">
+              <div className="input-cont">
+                <label htmlFor="cName">Certificate Name</label>
+                <input
+                  type="text"
+                  name="cName"
+                  value={formData.cName}
+                  onChange={handleChange}
+                  placeholder="Enter certificate name"
+                />
+
+                <label htmlFor="cLink">Certificate Link</label>
+                <input
+                  type="text"
+                  name="cLink"
+                  value={formData.cLink}
+                  onChange={handleChange}
+                  placeholder="Enter link"
+                />
+
+                <div class="upload-img">
+                  <label htmlFor="image">Upload Image</label>
+                  <input type="file" name="image" accept="image/*" className='addImage' onChange={handleImageChange} />
+                  {formData.image && <img src={formData.image} alt="Preview" className="preview-image" />}
+                  <div class="upload-content tech-old-addImage">
+                    <div class="edit-photo">
+                      <img src="https://admin.aspiraskillhub.aspirasys.com/images/profile-upload.png" alt="profile" />
+                    </div>
+                    <p class="font-16 fw_500"> Upload image</p>
+                  </div>
+                  <input type="file" name="image" class="input d-none addImage" id="addImage" required="" />
+                  <div class="invalid-feedback teck_image py-2"></div>
+                </div>
+              </div>
+              <div className="input-cont">
+                <label htmlFor="cId">Credential ID</label>
+                <input
+                  type="text"
+                  name="cId"
+                  value={formData.cId || 20258}
+                  onChange={handleChange}
+                />
+                <label htmlFor="Course">Select course</label>
+                <select name="Course" id="Course">
+                  <option value="Select course">Select course</option>
+                  <option value="Basic Web Technology">Basic Web Technology</option>
+                  <option value="React JS">React JS</option>
+                  <option value="Flutter">Flutter</option>
+                  <option value="ASP DotNet">ASP DotNet</option>
+                </select>
+                <label htmlFor="issues">Issues on</label>
+                <input
+                  type="date"
+                  name="issues"
+                  value={formData.issues}
+                  onChange={handleChange}
+                  placeholder=""
+                />
+              </div>
+            </div>
             <div className="modal-actions">
               <button onClick={closeModal}>Cancel</button>
               <button onClick={handleSubmit}>

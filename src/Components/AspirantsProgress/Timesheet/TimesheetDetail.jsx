@@ -175,10 +175,9 @@ const Wrapper = styled.section`
         height: 25px;
     }
 
-     .container-2 {
-    width: 100%;
-    min-height: 100vh;
-  }
+    .container-2 {
+      width: 100%;
+    }
 
   .header {
     width: 100% !important;
@@ -219,21 +218,30 @@ const Wrapper = styled.section`
     overflow-x: scroll;
   }
 
+    td {
+      color: #252e4a;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
   .odd {
     min-width: 770px;
     height: 45px;
+    padding-left: 10px;
     display: grid;
-    grid-template-columns: 50px 1fr 1.5fr 1.5fr 1fr 1fr 1.3fr;
+    grid-template-columns: 0.3fr 0.7fr 1fr 3fr 0.5fr 0.5fr!important;
     border: 1px solid #cbcbcb;
     border-top: none;
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
-    font-size: 14px;
 
-    td {
-      color: #505050;
-      padding: 10px;
+     td {
+      color: #252e4a;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 
@@ -244,6 +252,21 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+
+    td {
+      color: #252e4a99;
+      font-weight: 500;
+    }
+  }
+
+    .odd2 {
+    grid-template-columns: 1fr !important;
+    place-items: center;
+
+    td {
+      font-size: 16px !important;
+      color: #757f91;
+    }
   }
 
   .stack-output {
@@ -281,7 +304,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {
@@ -316,44 +338,6 @@ const Wrapper = styled.section`
     width: 95%;
     margin: 10px auto;
     overflow-x: scroll;
-  }
-
-  .odd {
-    min-width: 770px;
-    height: 45px;
-    padding-left: 10px;
-    display: grid;
-    grid-template-columns: 0.3fr 0.7fr 1fr 3fr 0.5fr 0.5fr!important;
-    border: 1px solid #cbcbcb;
-    border-top: none;
-    justify-content: space-evenly;
-    align-content: center;
-    align-items: center;
-    font-size: 14px;
-
-    td {
-      color: #505050;
-      padding: 10px;
-    }
-  }
-
-  .odd1 {
-    position: relative;
-    top: 4px;
-    color: #000000b0;
-    background: #ebf3fa;
-    font-size: 13px;
-    border: 1px solid #cbcbcb;
-  }
-
-  .odd2 {
-    grid-template-columns: 1fr !important;
-    place-items: center;
-
-    td {
-      font-size: 16px !important;
-      color: #757f91;
-    }
   }
 
   .stack-output {

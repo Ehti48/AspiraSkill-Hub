@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Heading from '../../Heading';
-import { NavLink, Link } from 'react-router-dom';
-import Button from '../../Button';
+import { NavLink, Link, useLocation } from 'react-router-dom';
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Wrapper = styled.section`
   .dateSec {
@@ -26,6 +26,7 @@ const Wrapper = styled.section`
     margin: 25px 0;
     display: flex;
     list-style: none;
+    align-items: center;
 
     li {
         font-size: 18px;
@@ -37,6 +38,11 @@ const Wrapper = styled.section`
             text-decoration: none;
             padding-right: 5px;
         }
+    }
+
+    svg {
+      font-size: 30px;
+      color: #252e4a99;
     }
   }
 
@@ -62,10 +68,9 @@ const Wrapper = styled.section`
         margin: 0;
     }
 
-     .container-2 {
-    width: 100%;
-    min-height: 100vh;
-  }
+    .container-2 {
+      width: 100%;
+    }
 
   .header {
     width: 100% !important;
@@ -116,15 +121,12 @@ const Wrapper = styled.section`
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
-    font-size: 14px;
 
     td {
-      color: #505050;
       padding: 10px;
-    }
-
-    .num {
-        padding: 10px 0 10px 25px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #252e4a;
     }
   }
 
@@ -135,6 +137,11 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+
+    td {
+      font-weight: 500;
+      color: #252e4a99;
+    }
   }
 
   .stack-output {
@@ -172,7 +179,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 50vh;
   }
 
   .searchBox {
@@ -209,8 +215,8 @@ const Wrapper = styled.section`
     min-width: 770px;
     height: 45px;
     display: grid;
-    grid-template-columns: 0.3fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr!important;
     border: 1px solid #cbcbcb;
+    grid-template-columns: 0.3fr 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr!important;
     border-top: none;
     justify-content: space-evenly;
     align-content: center;
@@ -250,19 +256,6 @@ const Wrapper = styled.section`
     p {
       padding-left: 10px;
     }
-
-    button {
-      margin-right: 15px;
-      background: none;
-      border: none;
-      cursor: pointer;
-
-      svg {
-        width: 100%;
-        height: 100%;
-        font-size: 24px;
-      }
-    }
   }
 
   .breadcrumb {
@@ -292,6 +285,10 @@ const InterviewDetail = () => {
       student.intrName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const location = useLocation();
+  const studentId = location.state?.studentId;
+  const studentName = location.state?.studentName;
+
   return (
     <Wrapper>
 
@@ -299,18 +296,19 @@ const InterviewDetail = () => {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb ad-sck">
             <li className="breadcrumb-item">
-              <Link to='/admin/aspirants-progress'>
-                Certificates
+              <Link to={{ pathname: "/admin/aspirants-progress", search: "?page=interviews" }}>
+                Interviews
               </Link>
             </li>
+            <MdKeyboardArrowRight />
             <li className="breadcrumb-item active" aria-current="page">
-              / ASP0450
+               {studentId}
             </li>
           </ol>
         </nav>
         <div className="usertime-id">
           <p className="usertime-name">
-            Aspirant : ASP0244 - Ibrahim.K
+            Aspirant : {studentId} - {studentName}
           </p>
         </div>
       </div>

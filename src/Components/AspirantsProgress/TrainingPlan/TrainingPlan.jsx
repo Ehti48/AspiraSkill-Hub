@@ -13,7 +13,6 @@ const Wrapper = styled.section`
 
      .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {
@@ -55,17 +54,19 @@ const Wrapper = styled.section`
     height: 45px;
     padding-left: 10px;
     display: grid;
-    grid-template-columns: 0.3fr 0.7fr 1.5fr 1.5fr 0.8fr 0.6fr !important;
+    grid-template-columns: 0.2fr 0.7fr 1.5fr 1.5fr 0.8fr 0.6fr !important;
     border: 1px solid #cbcbcb;
     border-top: none;
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
-    font-size: 14px;
+    
 
     td {
-      color: #252E4ABA;
       padding: 10px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #252E4A;
     }
   }
 
@@ -76,6 +77,11 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+
+    td {
+      font-weight: 500;
+      color: #252E4A99;
+    }
   }
 
   .odd2 {
@@ -122,7 +128,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {

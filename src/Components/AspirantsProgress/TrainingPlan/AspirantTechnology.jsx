@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Heading from '../../Heading';
 import { NavLink, Link, useLocation } from 'react-router-dom';
@@ -69,7 +69,6 @@ const Wrapper = styled.section`
 
      .container-2 {
     width: 100%;
-    min-height: 100vh;
   }
 
   .header {
@@ -121,20 +120,18 @@ const Wrapper = styled.section`
     height: 45px;
     padding-left: 10px;
     display: grid;
+    grid-template-columns: 0.2fr 0.8fr 1.5fr 0.5fr 0.5fr 0.5fr !important;
     border: 1px solid #cbcbcb;
     border-top: none;
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
-    font-size: 14px;
 
     td {
-      color: #505050;
       padding: 10px;
-    }
-
-    .num {
-        padding: 10px 0 10px 25px;
+      font-size: 14px;
+      font-weight: 400;
+      color: #252e4a;
     }
   }
 
@@ -145,6 +142,11 @@ const Wrapper = styled.section`
     background: #ebf3fa;
     font-size: 13px;
     border: 1px solid #cbcbcb;
+
+    td {
+      font-weight: 500;
+      color: #252e4a99;
+    }
   }
 
   .stack-output {
@@ -182,7 +184,6 @@ const Wrapper = styled.section`
 
   .container-2 {
     width: 100%;
-    min-height: 50vh;
   }
 
   .searchBox {
@@ -208,24 +209,6 @@ const Wrapper = styled.section`
     width: 95%;
     margin: 10px auto;
     overflow-x: scroll;
-  }
-
-  .odd {
-    min-width: 770px;
-    height: 45px;
-    display: grid;
-    grid-template-columns: 0.3fr 1fr 2fr 0.7fr 0.7fr 0.5fr!important;
-    border: 1px solid #cbcbcb;
-    border-top: none;
-    justify-content: space-evenly;
-    align-content: center;
-    align-items: center;
-    font-size: 14px;
-
-    td {
-      color: #252E4ABA;
-      padding: 10px;
-    }
   }
 
   .odd1 {
@@ -420,7 +403,7 @@ const AspirantTecnology = () => {
 
   //dummy data//
 
-  const techDetails = { 
+  const techDetails = {
     'Basic Web Technology': { techId: 'ASPT0001', stages: '3', projects: '10', materials: '100' },
     'Asp Dot Net': { techId: 'ASPT0002', stages: '5', projects: '12', materials: '150' },
     'Python': { techId: 'ASPT0003', stages: '4', projects: '15', materials: '120' },
@@ -563,7 +546,7 @@ const AspirantTecnology = () => {
             <div className="modal-header delete">
               <button onClick={() => setIsDeleteModalOpen(false)}>✖</button>
             </div>
-            
+
             <p>Are you sure?</p>
             <span>To delete {students[deleteIndex]?.techName || 'this technology'}?</span>
             <div className="modal-footer delete">
@@ -578,7 +561,10 @@ const AspirantTecnology = () => {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb ad-sck">
             <li className="breadcrumb-item">
-              <Link to="/admin/aspirants-progress">Training Plan</Link>
+              <Link to={{ pathname: "/admin/aspirants-progress", search: "?page=trainingPlan" }}>
+                Training Plan
+              </Link>
+
             </li>
             <MdKeyboardArrowRight />
             <li className="breadcrumb-item active" aria-current="page">

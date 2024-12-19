@@ -1,24 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Heading from "../Heading";
 
 const Wrapper = styled.section`
-  /* General Reset */
-  body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-  }
 
   /* Container */
   .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
+    width: 96%;
+    margin: 2% auto;
     background: #fff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -32,18 +25,20 @@ const Wrapper = styled.section`
   .search-form {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+    align-items: end;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    background: #fcfcfc;
     border: 1px solid #ddd;
-    padding: 10px;
+    border-radius: 4px;
+    padding: 20px;
   }
 
   .filter-group {
     width: fit-content;
     display: flex;
     flex-direction: column;
+    position: relative;
   
     padding: 0px;
 
@@ -51,39 +46,59 @@ const Wrapper = styled.section`
     select {
     width: fit-content;
     height: 40px;
+    background: rgba(249, 249, 249);
     border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
+    border: 1px solid #DEDEDE;
+    outline: none;
+    padding: 10px 22px;
+    background: none;
     }
     label {
-      font-weight: bold;
+      color: #7A7A7A;
+      font-size: 16px;
+      font-weight: 400;
+      margin-bottom: 10px;
     }
   }
+
+  .date-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 22px;
+    background: white;
+    pointer-events: none;
+    bottom: 12px;
+    display: flex;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+
   .filter-btn {
-    width: 200px;
     display: flex;
     gap: 15px;
-    padding: 10px;
-    margin-top: 20px;
+
+    button {
+      height: 40px;
+      font-size: 16px;
+    }
 
     .primary {
       background-color: #3282c4;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 70px;
       border-radius: 4px;
       border: none;
-      padding: 5px 10px;
-    }
-
-    .primary img {
-      width: 30px;
-      rotate: -5deg;
+      padding: 12px 18px;
     }
 
     button.secondary {
-      width: 120px;
+      padding: 12px;
       border: 2px solid #69a3d4;
       display: flex;
       justify-content: space-evenly;
@@ -97,8 +112,7 @@ const Wrapper = styled.section`
     }
 
     .secondary img {
-      rotate: 215deg;
-      transform: rotateX(170deg);
+        margin-right: 5px;
     }
 
     button {
@@ -142,14 +156,13 @@ const Wrapper = styled.section`
   }
 
   .new .add {
-    width: 140px;
-    padding: 10px 10px;
+    padding: 8px 18px;
     background-color: #3282c4;
     border-radius: 4px;
     border: none;
     color: white;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -180,10 +193,15 @@ const Wrapper = styled.section`
 
   table th {
     background-color: #ebf3fa;
-    color: #333;
-    font-weight: bold;
+    color: #252E4A99;
+    font-weight: 500;
+    font-size: 14px;
   }
-
+  tbody tr {
+    color: #252E4A;
+    font-weight: 400;
+    font-size: 14px;
+  }
   .action-button {
     color: #007bff;
     text-decoration: underline;
@@ -341,6 +359,7 @@ const Wrapper = styled.section`
   }
 }
 `;
+
 const NewRegisteration = () => {
   const [search, setSearch] = useState({
     date: "",
@@ -349,6 +368,17 @@ const NewRegisteration = () => {
     session: "",
     status: "",
   });
+
+  const handelReset = (e) => {
+    e.preventDefault();
+    setSearch({
+      date: "",
+      name: "",
+      mode: "",
+      session: "",
+      status: "",
+    })
+  }
   const handleOpenMail =
     ("click",
     () => {
@@ -449,6 +479,9 @@ const NewRegisteration = () => {
               value={search.date}
               onChange={handleSearchChange}
             />
+              <div className="date-icon">
+                <img src="https://admin.aspiraskillhub.aspirasys.com/images/Calendar.png" alt="Calendar" />
+              </div>
           </div>
           <div className="filter-group">
             <label>Name</label>
@@ -498,30 +531,21 @@ const NewRegisteration = () => {
           </div>
           <div className="filter-btn">
             <button className="primary">
-              <img src="\src\assets\search-icon.svg" alt="Error" />
+            <img src="https://admin.aspiraskillhub.aspirasys.com/images/search.png" alt=""/>
             </button>
             <button
               className="secondary"
-              onClick={() =>
-                setSearch({
-                  date: "",
-                  name: "",
-                  mode: "",
-                  session: "",
-                  status: "",
-                })
-              }
+              onClick={handelReset}
             >
-              <img src="\src\assets\reset-icon.svg" alt="Error" />
+              <img src="https://admin.aspiraskillhub.aspirasys.com/images/rotate-left.png" alt=""/>
               Reset
             </button>
           </div>
         </form>
         <div className="new">
-          <h2>New Aspirant Access</h2>
+          <Heading title="New Aspirant Access"/>
           <button className="primary add" onClick={handleOpenMail}>
-            <img src="\src\assets\add-icon.svg" alt="Error" />
-            Add Aspirant
+            + Add Aspirant
           </button>
         </div>
         <div className="mail-popup">
@@ -576,8 +600,8 @@ const NewRegisteration = () => {
                 <td>{aspirant.status}</td>
                 <td>
                   <button className="action-button">
-                    <Link to="/newaspirant">
-                      <img src="\src\assets\action.svg" alt="" />
+                    <Link to="/admin/new-registration/aspirants-view">
+                    <img src="https://admin.aspiraskillhub.aspirasys.com/images/export-pro.png"/>
                     </Link>
                   </button>
                 </td>
@@ -592,3 +616,5 @@ const NewRegisteration = () => {
 };
 
 export default NewRegisteration;
+
+/******  637f5f49-5bea-4e34-9a72-be2219598955  *******/

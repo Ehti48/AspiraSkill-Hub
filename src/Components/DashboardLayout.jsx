@@ -128,14 +128,14 @@ const Wrapper = styled.section`
 
     .navbar {
         width: 100%;
-        height: 80px;
-        padding: 0 25px;
+        height: 82px;
+        padding: 18px 18px 18px 20px;
         position: relative;
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: end;
         background: #fff;
-        box-shadow: 0px 2px 5px #00000010;
+        box-shadow: 0px 1px 4px 2px rgba(6, 40, 61, 0.03);
 
         span {
             color: #252e4a;
@@ -184,9 +184,13 @@ const DashboardLayout = () => {
             setHeaderText('Aspirants Progress');
         } else if (location.pathname === '/admin/new-registration') {
             setHeaderText('New Registration');
+        } else if (location.pathname === '/admin/new-registration/aspirants-view') {
+            setHeaderText('New Registration');
         } else if (location.pathname === '/admin/events-info') {
             setHeaderText('Events & Info');
         } else if (location.pathname === '/admin/master-data') {
+            setHeaderText('Master Data');
+        } else if (location.pathname === '/admin/master-data/view') {
             setHeaderText('Master Data');
         } else if (location.pathname === '/admin/roles') {
             setHeaderText('Roles');
